@@ -1,23 +1,32 @@
 
+import 'dart:convert';
+
 class EnderecoModel {
   final String cep; 
   final String logradouro; 
   final String complemento; 
+
   EnderecoModel({
     required this.cep,
     required this.logradouro,
     required this.complemento,
   });
 
-  Map<String,dynamic> toMap(){
-    return {
+  Map<String, dynamic> toMap(){
+    return{
       'cep': cep,
       'logradouro': logradouro,
-      'complemento': complemento
+      'complemento': complemento,
     };
   }
+  factory EnderecoModel.fromMap(Map<String, dynamic> map){
+    return EnderecoModel(
+      cep: map['cep'],
+      logradouro: map['logradouro'],
+      complemento: map['complemento'],
+      );
+  }
 
-  factory CepModel.fromMap(Map<String,dynamic> map){}
-
-  factory CepModel.fromJson(String json) => CepModel.fromMap(json.decore(json));
+  factory EnderecoModel.fromJson(String json) =>
+      EnderecoModel.fromMap(jsonDecode(json));
 }
